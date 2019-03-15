@@ -29,7 +29,7 @@ export class Response {
 @Injectable()
 export class AppServiceService {
   rootURL = '';
-  // rootURL = 'https://samappartement.herokuapp.com/';
+  // rootURL = 'https://farmsandpods.herokuapp.com/';
   appInfo;
   appartement: Appartement[] = [];
   farmOwner: FarmOwner[] = [];
@@ -55,7 +55,7 @@ export class AppServiceService {
     // if (true) {
       this.rootURL = document.location.origin + '/';
     // } else {
-      this.rootURL = 'http://localhost:8084/';
+      // this.rootURL = 'http://localhost:8084/';
     // }
     console.log(document.location.origin);
   }
