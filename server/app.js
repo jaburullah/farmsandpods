@@ -6,7 +6,7 @@ var config = {
     port:process.env.PORT || 8084,
     ip:"localhost",
     mongoDBConnection:"mongodb://localhost:27018/SAMAPP",
-    // mongoDBConnectionProduction:"mongodb://jabuadmin:jabu_1989@cluster0-shard-00-00-qpdof.mongodb.net:27017,cluster0-shard-00-01-qpdof.mongodb.net:27017,cluster0-shard-00-02-qpdof.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true",
+    mongoDBConnectionProduction:"mongodb://jabuadmin:jabu_1989@cluster0-shard-00-00-qpdof.mongodb.net:27017,cluster0-shard-00-01-qpdof.mongodb.net:27017,cluster0-shard-00-02-qpdof.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true",
     fcmServerKey:"AAAA41C0U6s:APA91bHdRWhXhNcFKmxM_jYTigjxF4A82XOak3Bt8lIpaKeEFqqoqN1Qjkr8Vxkg3sI8vpMoj70l1OrcXzQKXpRxb9EYEtA3V7Q9MgLHBcUmmS-O6VDaa6jXKd1qEDwJvi4CvcpSSscb",
     appSetting:{
         ticketCategory:{

@@ -68,11 +68,11 @@ export class CreateComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onChangePodOwner() {
+  onChangePodOwner(data) {
 
   }
 
-  onChangeFarm() {
+  onChangeFarm(data) {
 
   }
 
