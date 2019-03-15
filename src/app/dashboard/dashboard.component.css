@@ -1,0 +1,16 @@
+.icon-34px{
+  font-size: 34px;
+}
+.example-full-width {
+  width: 100%;
+}
+
+.action-list-scroll{
+  overflow: scroll;
+  max-height: 300px;
+}
+
+.action-list-big-scroll{
+  overflow: scroll;
+  max-height: 600px;
+}

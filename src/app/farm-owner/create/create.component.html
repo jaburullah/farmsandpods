@@ -1,0 +1,145 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <form [formGroup]="farmOwnerForm" #farmownerform="ngForm" novalidate (ngSubmit)="onSubmitFarmOwnerInfo()">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Create Farm Owner</h4>
+          </div>
+          <div class="card-body">
+            <input type="hidden" formControlName="_id" />
+            <input type="hidden" formControlName="isDeleted" />
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Name" formControlName="name">
+                    <mat-error>
+                      {{errors.name}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Contact Number" type="text" formControlName="contactNumber">
+                    <mat-error>
+                      {{errors.contactNumber}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Email" type="text" formControlName="email">
+                    <mat-error>
+                      {{errors.email}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-form-field class="example-full-width">
+                    <textarea matInput placeholder="Address" formControlName="address"></textarea>
+                    <mat-error>
+                      {{errors.address}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-2">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Pincode" formControlName="pincode">
+                    <mat-error>
+                      {{errors.pincode}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <input matInput [matDatepicker]="picker_LIFT_NSDU" placeholder="Date of Birth" formControlName="dob">
+                    <mat-datepicker-toggle matSuffix [for]="picker_LIFT_NSDU"></mat-datepicker-toggle>
+                    <mat-datepicker #picker_LIFT_NSDU></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-2">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="BG" formControlName="bg">
+                    <!-- <mat-error>
+                      {{errors.noOfHouses}}
+                    </mat-error> -->
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <!-- Login info -->
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-header card-header-danger">
+                      <h4 class="card-title">Farm Owner Login Info</h4>
+                    </div>
+                    <div class="card-body">
+                      <!--<form>-->
+                      <div class="row">
+                        <div class="col-md-6">
+                          <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Login Email" formControlName="userName" [(ngModel)]="userName">
+                            <mat-error>
+                              {{errors.email}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Login Password" type="password" formControlName="password">
+                            <mat-error>
+                              {{errors.password}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                      <!--</form>-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+          </div>
+          <div class="card-footer">
+            <button mat-raised-button type="button" class="btn btn-secondary pull-right mr-2" (click)="onClickBack()">Back</button>
+            <button mat-raised-button type="button" *ngIf="selectedFarmOwnerIndex >= 0 && !sessionM.isManager()" color="warn" class="btn btn-primary pull-right mr-2" (click)="onClickDelete(appartementdelete)">Delete</button>
+            <button mat-raised-button #actionbutton color="primary" type="submit" class="btn btn-primary pull-right mr-2">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+<ng-template #appartementdelete let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+    <button class="close" type="button" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">Are your sure want to delete ?</div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" type="button" data-dismiss="modal" (click)="d('Cross click')">Cancel</button>
+    <a class="btn btn-primary" (click)="onClickOk()">Ok</a>
+  </div>
+</ng-template>

@@ -1,0 +1,16 @@
+
+  <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+    <li  *ngFor="let menu of menuItems" class="nav-item" data-toggle="tooltip" data-placement="right" title="{{menu.getTitle()}}">
+      <a class="nav-link" (click)="onNavigate(menu)" >
+        <i class="fa fa-fw {{ menu.getIcon() }} mr-1"></i>
+        <span class="nav-link-text">{{menu.getName()}}</span>
+      </a>
+    </li>
+  </ul>
+  <ul class="navbar-nav sidenav-toggler">
+    <li class="nav-item">
+      <a class="nav-link text-center" id="sidenavToggler" (click)="onHideSideBar()">
+        <i class="fa fa-fw fa-angle-left"></i>
+      </a>
+    </li>
+  </ul>

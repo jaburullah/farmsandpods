@@ -1,0 +1,153 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <form [formGroup]="ticketInfoForm" #ticketform="ngForm" novalidate (ngSubmit)="onSubmitTicket()">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card-header-danger">
+              <h4 class="card-title">Create Ticket</h4>
+            </div>
+            <div class="card-body">
+              <!-- Basic -->
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-header card-header-danger">
+                      <h4 class="card-title">Ticket Info</h4>
+                    </div>
+                    <div class="card-body">
+                      <!--<form>-->
+                      <input type="hidden" formControlName="_id">
+                      <input type="hidden" formControlName="isDeleted">
+                      <input type="hidden" formControlName="createdDate">
+                      <input type="hidden" formControlName="modifiedDate">
+                      <input type="hidden" formControlName="no">
+                      <input type="hidden" formControlName="isManagerAction">
+                      <input type="hidden" formControlName="owner">
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <mat-form-field class="example-full-width">
+                            <mat-select placeholder="Category" formControlName="category" >
+                              <mat-option *ngFor="let category of categories" [value]="category.name">{{category.name}}</mat-option>
+                            </mat-select>
+                            <mat-error>
+                              {{errors.category}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <mat-form-field class="example-full-width">
+                            <mat-select placeholder="Priority" formControlName="priority" >
+                              <mat-option *ngFor="let priority of priorities" [value]="priority.name">{{priority.name}}</mat-option>
+                            </mat-select>
+                            <mat-error>
+                              {{errors.priority}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <mat-form-field class="example-full-width">
+                            <mat-select placeholder="Status" formControlName="status" >
+                              <mat-option *ngFor="let status of statutes" [value]="status.name">{{status.name}}</mat-option>
+                            </mat-select>
+                            <mat-error>
+                              {{errors.status}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <mat-form-field class="example-full-width">
+                            <mat-select placeholder="Assignee" formControlName="assignee" >
+                              <mat-option *ngFor="let manager of managers" [value]="manager._id">{{manager.name}}</mat-option>
+                            </mat-select>
+                            <mat-error>
+                              {{errors.assignee}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <mat-form-field class="example-full-width">
+                            <mat-select placeholder="Appartement" formControlName="appartement" >
+                              <mat-option *ngFor="let appartement of appartements" [value]="appartement._id">{{appartement.name}}</mat-option>
+                            </mat-select>
+                            <mat-error>
+                              {{errors.appartement}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <mat-form-field class="example-full-width">
+                            <mat-select placeholder="Reporter" formControlName="reporter" >
+                              <mat-option *ngFor="let tenant of tenants" [value]="tenant._id">{{tenant.name}}</mat-option>
+                            </mat-select>
+                            <mat-error>
+                              {{errors.reporter}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          <mat-form-field class="example-full-width">
+                            <textarea matInput placeholder="Summary" formControlName="summary"></textarea>
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          <mat-form-field class="example-full-width">
+                            <textarea matInput placeholder="Description" formControlName="description"></textarea>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                      <!--</form>-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button mat-raised-button type="button" class="btn btn-secondary pull-right mr-2" (click)="onClickBack()">Back</button>
+              <button mat-raised-button type="button" *ngIf="selectedTicketIndex >= 0" color="warn" class="btn btn-primary pull-right mr-2" (click)="onClickDelete(ticketdelete)">Delete</button>
+              <button mat-raised-button #actionbutton color="primary" type="submit" class="btn btn-primary pull-right mr-2">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<ng-template #ticketdelete let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+    <button class="close" type="button" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">Are your sure want to delete ?</div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" type="button" data-dismiss="modal" (click)="d('Cross click')">Cancel</button>
+    <a class="btn btn-primary" (click)="onClickOk()">Ok</a>
+  </div>
+</ng-template>

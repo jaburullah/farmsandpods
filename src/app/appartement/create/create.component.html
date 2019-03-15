@@ -1,0 +1,512 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <form [formGroup]="basicInfoForm" #basicinfoform="ngForm" novalidate (ngSubmit)="onSubmitBasicInfo()">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Create Appartement</h4>
+          </div>
+          <div class="card-body">
+            <!-- Basic -->
+
+            <div class="row">
+              <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-danger">
+                  <h4 class="card-title">Basic Info</h4>
+                </div>
+                <div class="card-body">
+                  <!--<form>-->
+                  <input type="hidden" formControlName="_id">
+                  <input type="hidden" formControlName="isDeleted">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Name" formControlName="name">
+                          <mat-error>
+                            {{errors.name}}
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-2">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="No.of Houses" formControlName="noOfHouses">
+                          <mat-error>
+                            {{errors.noOfHouses}}
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <mat-form-field class="example-full-width">
+                          <textarea matInput placeholder="Address" formControlName="address"></textarea>
+                          <mat-error>
+                            {{errors.address}}
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Group/President email Id" type="text" formControlName="presidentEmail">
+                          <mat-error>
+                            {{errors.email}}
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Contact Number" type="text" formControlName="contactNumber">
+                          <mat-error>
+                            {{errors.contactNumber}}
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                  <!--</form>-->
+                </div>
+              </div>
+              </div>
+            </div>
+            <!-- More info -->
+            <div class="row">
+              <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-danger">
+                  <h4 class="card-title">More Info</h4>
+                </div>
+                <div class="card-body">
+                  <mat-tab-group>
+                    <!-- Generator info -->
+                    <mat-tab label="Generator">
+                      <!-- Generator list -->
+                      <div class="tab-table-container">
+                        <table mat-table [dataSource]="GeneratorDetailsData" class="mat-elevation-z8">
+
+                          <ng-container matColumnDef="sno">
+                            <th mat-header-cell *matHeaderCellDef> No. </th>
+                            <td mat-cell *matCellDef="let element; let ind = index;"> {{ ind + 1}} </td>
+                          </ng-container>
+                          <!-- Name Column -->
+                          <ng-container dd="data" matColumnDef="capacity">
+                            <th mat-header-cell *matHeaderCellDef> Generator Details </th>
+                            <td mat-cell *matCellDef="let element">
+                              <mat-accordion>
+                                <mat-expansion-panel>
+                                  <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                      Generator Info -> {{element.generatorInfo.vendor}}
+                                    </mat-panel-title>
+                                  </mat-expansion-panel-header>
+                                  <div class="row-content">
+                                    <div class="row">
+                                      <mat-card-subtitle>Vendor: {{element.generatorInfo.vendor}}</mat-card-subtitle>
+                                    </div>
+                                    <div class="row">
+                                      <mat-card-subtitle>Capacity: {{element.generatorInfo.capacity}} </mat-card-subtitle>
+                                    </div>
+                                    <div class="row">
+                                      <mat-card-subtitle>Serial Number: {{element.generatorInfo.serialNumber}}</mat-card-subtitle>
+                                    </div>
+                                    <div class="row">
+                                      <mat-card-subtitle>Contact Number: {{element.generatorInfo.contactNumber}}</mat-card-subtitle>
+                                    </div>
+                                  </div>
+                                </mat-expansion-panel>
+                                <mat-expansion-panel>
+                                  <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                      AMC Details -> {{element.amcDetails.vendor}}
+                                    </mat-panel-title>
+                                  </mat-expansion-panel-header>
+                                  <div class="row-content">
+                                    <div class="row">
+                                      <mat-card-subtitle>Vendor: {{element.amcDetails.vendor}} </mat-card-subtitle>
+                                    </div>
+                                    <div class="row">
+                                      <mat-card-subtitle>Cost: {{element.amcDetails.cost}}</mat-card-subtitle>
+                                    </div>
+                                    <div class="row">
+                                      <mat-card-subtitle>Service Due Date: {{element.amcDetails.serviceDueDate | date:"dd/MM/yyyy"}}</mat-card-subtitle>
+                                    </div>
+                                    <div class="row">
+                                      <mat-card-subtitle>Expiry Date: {{element.amcDetails.expiryDate | date:"dd/MM/yyyy"}}</mat-card-subtitle>
+                                    </div>
+                                  </div>
+                                </mat-expansion-panel>
+                              </mat-accordion>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef> Action </th>
+                            <td mat-cell *matCellDef="let element;let ind = index;"> <i class="fa fa-ws fa-trash" (click)="onDeleteGeneratorDetails(ind)"></i> </td>
+                          </ng-container>
+
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns1; sticky: true"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+                        </table>
+                      </div>
+                      <mat-divider></mat-divider>
+                      <div class="tab-input-container">
+                        <mat-card>
+                          <mat-card-content>
+                            <div class="container-fluid">
+                              <form [formGroup]="generatorDetailsForm" novalidate #generatorform="ngForm" (ngSubmit)="onSubmitGenerator()">
+                                <div class="row">
+                                  <div class="col-md-12">
+                                      <div class="row">
+                                        <!-- Generator Details -->
+                                        <div class="col-md-6">
+                                          <div>
+                                            <mat-card-title>Generator Info</mat-card-title>
+                                            <fieldset formGroupName="generatorInfo">
+                                              <div class="row">
+                                                <div class="col-md-3">
+                                                  <mat-form-field class="example-full-width">
+                                                    <input matInput placeholder="Vendor" formControlName="vendor">
+                                                    <mat-error>
+                                                      {{errors.generatorVendor}}
+                                                    </mat-error>
+                                                  </mat-form-field>
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-md-8">
+                                                  <mat-form-field class="example-full-width">
+                                                    <input matInput placeholder="Capacity" formControlName="capacity">
+                                                  </mat-form-field>
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-md-8">
+                                                  <mat-form-field class="example-full-width">
+                                                    <input matInput placeholder="Serial Number" formControlName="serialNumber">
+                                                  </mat-form-field>
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-md-3">
+                                                  <mat-form-field class="example-full-width">
+                                                    <input matInput placeholder="Contact Number" formControlName="contactNumber">
+                                                  </mat-form-field>
+                                                </div>
+                                              </div>
+                                            </fieldset>
+                                          </div>
+                                        </div>
+                                        <!-- Generator AMC Details -->
+                                        <div class="col-md-6">
+                                          <div>
+                                            <mat-card-title>AMC Details</mat-card-title>
+                                            <fieldset formGroupName="amcDetails">
+                                              <div class="row">
+                                                <div class="col-md-8">
+                                                  <mat-form-field class="example-full-width">
+                                                    <input matInput placeholder="Vendor" formControlName="vendor">
+                                                    <mat-error>
+                                                      {{errors.generatorAMCVendor}}
+                                                    </mat-error>
+                                                  </mat-form-field>
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-md-3">
+                                                  <mat-form-field class="example-full-width">
+                                                    <input matInput placeholder="Cost" formControlName="cost">
+                                                  </mat-form-field>
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-md-6">
+                                                  <mat-form-field>
+                                                    <input matInput [matDatepicker]="picker_GEN_NSDU" placeholder="Service Due date" formControlName="serviceDueDate">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker_GEN_NSDU"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker_GEN_NSDU></mat-datepicker>
+                                                  </mat-form-field>
+                                                </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-md-6">
+                                                  <mat-form-field>
+                                                    <input matInput [matDatepicker]="picker_GEN_ED" placeholder="Expiry Date" formControlName="expiryDate">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker_GEN_ED"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker_GEN_ED></mat-datepicker>
+                                                  </mat-form-field>
+                                                </div>
+                                              </div>
+                                            </fieldset>
+                                          </div>
+                                        </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-12 text-center">
+                                    <button mat-raised-button type="submit" class="btn btn-primary">Add</button>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                          </mat-card-content>
+                        </mat-card>
+                      </div>
+                    </mat-tab>
+                    <!-- Lift info -->
+                    <mat-tab label="Lift">
+                      <!-- Lift list -->
+                      <div class="tab-table-container">
+                        <table mat-table [dataSource]="liftDetailsData" class="mat-elevation-z8">
+
+                          <ng-container matColumnDef="sno">
+                            <th mat-header-cell *matHeaderCellDef> No. </th>
+                            <td mat-cell *matCellDef="let element;let ind = index;"> {{(ind + 1)}} </td>
+                          </ng-container>
+                          <!-- Name Column -->
+                          <ng-container dd="data" matColumnDef="capacity">
+                            <th mat-header-cell *matHeaderCellDef> Lift Details </th>
+                            <td mat-cell *matCellDef="let element">
+                              <mat-accordion>
+                                <mat-expansion-panel>
+                                  <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                      Lift Info -> {{element.liftInfo.vendor}}
+                                    </mat-panel-title>
+                                  </mat-expansion-panel-header>
+                                  <div class="row-content">
+                                    <div class="row">
+                                      <mat-card-subtitle>Vendor: {{element.liftInfo.vendor}}</mat-card-subtitle>
+                                    </div>
+                                    <div class="row">
+                                      <mat-card-subtitle>Serial Number: {{element.liftInfo.serialNumber}}</mat-card-subtitle>
+                                    </div>
+                                    <div class="row">
+                                      <mat-card-subtitle>Contact Number: {{element.liftInfo.contactNumber}}</mat-card-subtitle>
+                                    </div>
+                                  </div>
+                                </mat-expansion-panel>
+                                <mat-expansion-panel>
+                                  <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                      AMC Details -> {{element.amcDetails.vendor}}
+                                    </mat-panel-title>
+                                  </mat-expansion-panel-header>
+                                  <div class="row-content">
+                                    <div class="row">
+                                      <mat-card-subtitle>Vendor: {{element.amcDetails.vendor}} </mat-card-subtitle>
+                                    </div>
+                                    <div class="row">
+                                      <mat-card-subtitle>Cost: {{element.amcDetails.cost}}</mat-card-subtitle>
+                                    </div>
+                                    <div class="row">
+                                      <mat-card-subtitle>Service Due Date: {{element.amcDetails.serviceDueDate | date:"dd/MM/yyyy"}}</mat-card-subtitle>
+                                    </div>
+                                    <div class="row">
+                                      <mat-card-subtitle>Expiry Date: {{element.amcDetails.expiryDate | date:"dd/MM/yyyy"}}</mat-card-subtitle>
+                                    </div>
+                                  </div>
+                                </mat-expansion-panel>
+                              </mat-accordion>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef> Action </th>
+                            <td mat-cell *matCellDef="let element;let ind = index;"> <i class="fa fa-ws fa-trash" (click)="onDeleteLiftDetails(ind)"></i> </td>
+                          </ng-container>
+
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns1; sticky: true"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+                        </table>
+                      </div>
+                      <mat-divider></mat-divider>
+                      <div class="tab-input-container">
+                        <mat-card>
+                          <mat-card-content>
+                            <div class="container-fluid">
+                              <form [formGroup]="liftDetailsForm" #liftform="ngForm" novalidate (ngSubmit)="onSubmitLift()">
+                                <div class="row">
+                                <div class="col-md-12">
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                      <!-- Lift Details -->
+                                      <div>
+                                        <mat-card-title>Lift Info</mat-card-title>
+                                        <fieldset formGroupName="liftInfo">
+                                          <div class="row">
+                                            <div class="col-md-8">
+                                              <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="Vendor" formControlName="vendor">
+                                                <mat-error>
+                                                  {{errors.liftVendor}}
+                                                </mat-error>
+                                              </mat-form-field>
+                                            </div>
+                                          </div>
+                                          <div class="row">
+                                            <div class="col-md-8">
+                                              <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="Serial Number" formControlName="serialNumber">
+                                              </mat-form-field>
+                                            </div>
+                                          </div>
+                                          <div class="row">
+                                            <div class="col-md-3">
+                                              <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="Contact Number" formControlName="contactNumber">
+                                              </mat-form-field>
+                                            </div>
+                                          </div>
+                                        </fieldset>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <!-- Lift AMC Detials -->
+                                      <div>
+                                        <mat-card-title>AMC Details</mat-card-title>
+                                        <fieldset formGroupName="amcDetails">
+                                          <div class="row">
+                                            <div class="col-md-8">
+                                              <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="Vendor" formControlName="vendor">
+                                                <mat-error>
+                                                  {{errors.liftAMCVendor}}
+                                                </mat-error>
+                                              </mat-form-field>
+                                            </div>
+                                          </div>
+                                          <div class="row">
+                                            <div class="col-md-3">
+                                              <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="Cost" formControlName="cost">
+                                              </mat-form-field>
+                                            </div>
+                                          </div>
+                                          <div class="row">
+                                            <div class="col-md-6">
+                                              <mat-form-field>
+                                                <input matInput [matDatepicker]="picker_LIFT_NSDU" placeholder="Service Due date" formControlName="serviceDueDate">
+                                                <mat-datepicker-toggle matSuffix [for]="picker_LIFT_NSDU"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker_LIFT_NSDU></mat-datepicker>
+                                              </mat-form-field>
+                                            </div>
+                                          </div>
+                                          <div class="row">
+                                            <div class="col-md-6">
+                                              <mat-form-field>
+                                                <input matInput [matDatepicker]="picker_LIFT_ED" placeholder="Expiry Date" formControlName="expiryDate">
+                                                <mat-datepicker-toggle matSuffix [for]="picker_LIFT_ED"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker_LIFT_ED></mat-datepicker>
+                                              </mat-form-field>
+                                            </div>
+                                          </div>
+                                        </fieldset>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-12 text-center">
+                                  <button mat-raised-button type="submit" class="btn btn-primary">Add</button>
+                                </div>
+                              </div>
+                              </form>
+                            </div>
+                          </mat-card-content>
+                        </mat-card>
+                      </div>
+                    </mat-tab>
+                  </mat-tab-group>
+                </div>
+              </div>
+              </div>
+            </div>
+            <!-- STP info -->
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header card-header-danger">
+                    <h4 class="card-title">STP Info</h4>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Vendor" formControlName="stpVendor">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-2">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Contact number" formControlName="stpContactNumber">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Other Items -->
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header card-header-danger">
+                    <h4 class="card-title">Other Items</h4>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-2">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="No.of Chairs" formControlName="noOfChairs">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-2">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="No.of Tables" formControlName="noOfTables">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-2">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="No.of Mics" formControlName="noOfMics">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button mat-raised-button type="button" class="btn btn-secondary pull-right mr-2" (click)="onClickBack()">Back</button>
+            <button mat-raised-button type="button" *ngIf="selectedAppartementIndex >= 0 && !sessionM.isManager()" color="warn" class="btn btn-primary pull-right mr-2" (click)="onClickDelete(appartementdelete)">Delete</button>
+            <button mat-raised-button #actionbutton color="primary" type="submit" class="btn btn-primary pull-right mr-2">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+<ng-template #appartementdelete let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+    <button class="close" type="button" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">Are your sure want to delete ?</div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" type="button" data-dismiss="modal" (click)="d('Cross click')">Cancel</button>
+    <a class="btn btn-primary" (click)="onClickOk()">Ok</a>
+  </div>
+</ng-template>

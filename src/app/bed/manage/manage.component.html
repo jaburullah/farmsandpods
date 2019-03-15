@@ -1,0 +1,55 @@
+<div class="card mb-3" >
+  <div class="card-header">
+    <i class="fa fa-building"></i> Manage Bed
+    <button mat-raised-button type="button" color="primary" class="btn btn-primary pull-right mr-2"
+    (click)="onClickCreate()" *ngIf="sessionM.isAdmin()">Create Bed</button>
+  </div>
+  <div class="card-body">
+    <div class="example-container">
+      <!--class="mat-elevation-z8"-->
+      <table mat-table [dataSource]="bedGrid" >
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- No Column -->
+        <ng-container matColumnDef="sno">
+          <th mat-header-cell *matHeaderCellDef class="text-center"> No. </th>
+          <td mat-cell *matCellDef="let element; let ind = index;" class="text-center"> {{ ind + 1}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <!-- No.of Houses Column -->
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef class="text-center"> Type </th>
+          <td mat-cell *matCellDef="let element" class="text-center"> {{element.type}} </td>
+        </ng-container>
+
+        <!-- Address Column -->
+        <ng-container matColumnDef="area">
+          <th mat-header-cell *matHeaderCellDef> Area </th>
+          <td mat-cell *matCellDef="let element"> {{element.area}} </td>
+        </ng-container>
+
+
+        <!-- Action Column -->
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef class="text-center"> Action </th>
+          <td mat-cell *matCellDef="let element; let ind = index;" class="text-center">
+            <i class="fa fa-pencil mouse-cursor-pointer mr-2" (click)="onEdit(ind, element)"></i>
+            <!--<i class="fa fa-trash mouse-cursor-pointer" (click)="onDelete(element)"></i>-->
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[15, 30, 50]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>

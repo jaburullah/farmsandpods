@@ -1,0 +1,125 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <form [formGroup]="podForm" #podform="ngForm" novalidate (ngSubmit)="onSubmitFarmInfo()">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Create Pod</h4>
+          </div>
+          <div class="card-body">
+            <input type="hidden" formControlName="_id" />
+            <input type="hidden" formControlName="isDeleted" />
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field class="example-full-width">
+                  <mat-select placeholder="Farm" formControlName="farmID" (selectionChange)="onChangeFarm($event.value)">
+                    <mat-option *ngFor="let f of farm" [value]="f._id">{{f.name}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Name" formControlName="name">
+                    <mat-error>
+                      {{errors.name}}
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-form-field class="example-full-width">
+                    <textarea matInput placeholder="Description" formControlName="description"></textarea>
+                    <!-- <mat-error>
+                      {{errors.address}}
+                    </mat-error> -->
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Pod Number" formControlName="podNumber">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Total Area" formControlName="totalArea">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Growing Area" formControlName="growingArea">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Common Area" formControlName="commonArea">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <mat-select placeholder="Pod Owner" formControlName="podOwnerID" (selectionChange)="onChangePodOwner($event.value)">
+                      <mat-option *ngFor="let owner of podOwner" [value]="owner._id">{{owner.name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Subscription Amount" formControlName="subscriptionAmount">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Latitude" formControlName="latitude">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Longitude" formControlName="longitude">
+                  </mat-form-field>
+                </div>
+              </div>
+
+          </div>
+          <div class="card-footer">
+            <button mat-raised-button type="button" class="btn btn-secondary pull-right mr-2" (click)="onClickBack()">Back</button>
+            <button mat-raised-button type="button" *ngIf="selectedPodIndex >= 0 && !sessionM.isManager()" color="warn" class="btn btn-primary pull-right mr-2" (click)="onClickDelete(appartementdelete)">Delete</button>
+            <button mat-raised-button #actionbutton color="primary" type="submit" class="btn btn-primary pull-right mr-2">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+<ng-template #appartementdelete let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+    <button class="close" type="button" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">Are your sure want to delete ?</div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" type="button" data-dismiss="modal" (click)="d('Cross click')">Cancel</button>
+    <a class="btn btn-primary" (click)="onClickOk()">Ok</a>
+  </div>
+</ng-template>

@@ -1,0 +1,25 @@
+.example-container {
+  height: 800px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+.tab-table-container{
+  width: 100%;
+  padding: 10px;
+  height: 500px;
+  overflow: scroll;
+  margin-bottom: 20px;
+}
+td.mat-cell{
+  /*border-bottom-width: 0px !important;*/
+  padding: 10px 0px;
+}
+.row-content{
+  padding: 15px;
+}
+.example-full-width{
+  width: 100%;
+}

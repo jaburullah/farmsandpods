@@ -1,0 +1,235 @@
+<div class="card mb-3" >
+  <div class="card-header">
+    <i class="fa fa-building"></i> Appartement Information
+  </div>
+  <div class="card-body">
+
+    <div class="col-xl-12">
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-user-secret"></i> Appartement Primary Managers
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-xl-3 col-sm-6 mb-3">
+              <div class="row-content" *ngFor="let manager of primaryManagers">
+                <div class="row">
+                  <mat-card-subtitle> <b>Name:</b> {{manager.name}}</mat-card-subtitle>
+                </div>
+                <div class="row">
+                  <mat-card-subtitle><b>Email:</b> {{manager.email}}</mat-card-subtitle>
+                </div>
+                <div class="row">
+                  <mat-card-subtitle><b>Contact Number:</b> {{manager.mobileNo}}</mat-card-subtitle>
+                </div>
+                <div class="row w-100">
+                  <mat-divider class="w-100"></mat-divider>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-12">
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-user-secret"></i> Appartement Secondary Managers
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-xl-3 col-sm-6 mb-3">
+              <div class="row-content" *ngFor="let manager of secondaryManagers">
+                <div class="row">
+                  <mat-card-subtitle> <b>Name:</b> {{manager.name}}</mat-card-subtitle>
+                </div>
+                <div class="row">
+                  <mat-card-subtitle><b>Email:</b> {{manager.email}}</mat-card-subtitle>
+                </div>
+                <div class="row">
+                  <mat-card-subtitle><b>Contact Number:</b> {{manager.mobileNo}}</mat-card-subtitle>
+                </div>
+                <div class="row w-100">
+                  <mat-divider class="w-100"></mat-divider>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-12 col-sm-6 mb-3">
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-cogs"></i> Appartemnt Asserts
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-xl-12">
+                <mat-tab-group>
+                  <!-- Generator info -->
+                  <mat-tab label="Generator">
+                    <!-- Generator list -->
+                    <div class="tab-table-container">
+                      <table mat-table [dataSource]="GeneratorDetailsData" >
+
+                        <ng-container matColumnDef="sno">
+                          <th mat-header-cell *matHeaderCellDef> No. </th>
+                          <td mat-cell *matCellDef="let element; let ind = index;"> {{ ind + 1}} </td>
+                        </ng-container>
+                        <!-- Name Column -->
+                        <ng-container dd="data" matColumnDef="details">
+                          <th mat-header-cell *matHeaderCellDef> Generator Details </th>
+                          <td mat-cell *matCellDef="let element">
+                            <mat-accordion>
+                              <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                  <mat-panel-title>
+                                    Generator Info -> {{element.generatorInfo.vendor}}
+                                  </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <div class="row-content">
+                                  <div class="row">
+                                    <mat-card-subtitle>Vendor: {{element.generatorInfo.vendor}}</mat-card-subtitle>
+                                  </div>
+                                  <div class="row">
+                                    <mat-card-subtitle>Capacity: {{element.generatorInfo.capacity}} </mat-card-subtitle>
+                                  </div>
+                                  <div class="row">
+                                    <mat-card-subtitle>Serial Number: {{element.generatorInfo.serialNumber}}</mat-card-subtitle>
+                                  </div>
+                                  <div class="row">
+                                    <mat-card-subtitle>Contact Number: {{element.generatorInfo.contactNumber}}</mat-card-subtitle>
+                                  </div>
+                                </div>
+                              </mat-expansion-panel>
+                              <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                  <mat-panel-title>
+                                    AMC Details -> {{element.amcDetails.vendor}}
+                                  </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <div class="row-content">
+                                  <div class="row">
+                                    <mat-card-subtitle>Vendor: {{element.amcDetails.vendor}} </mat-card-subtitle>
+                                  </div>
+                                  <div class="row">
+                                    <mat-card-subtitle>Cost: {{element.amcDetails.cost}}</mat-card-subtitle>
+                                  </div>
+                                  <div class="row">
+                                    <mat-card-subtitle>Service Due Date: {{ element.amcDetails.serviceDueDate | date:"dd/MM/yyyy" }}</mat-card-subtitle>
+                                  </div>
+                                  <div class="row">
+                                    <mat-card-subtitle>Expiry Date: {{element.amcDetails.expiryDate | date:"dd/MM/yyyy" }}</mat-card-subtitle>
+                                  </div>
+                                </div>
+                              </mat-expansion-panel>
+                            </mat-accordion>
+                          </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="moreInfoTableColumns; sticky: true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: moreInfoTableColumns;"></tr>
+                      </table>
+                    </div>
+                  </mat-tab>
+                  <!-- Lift info -->
+                  <mat-tab label="Lift">
+                    <!-- Lift list -->
+                    <div class="tab-table-container">
+                      <table mat-table [dataSource]="liftDetailsData" >
+
+                        <ng-container matColumnDef="sno">
+                          <th mat-header-cell *matHeaderCellDef> No. </th>
+                          <td mat-cell *matCellDef="let element;let ind = index;"> {{(ind + 1)}} </td>
+                        </ng-container>
+                        <!-- Name Column -->
+                        <ng-container dd="data" matColumnDef="details">
+                          <th mat-header-cell *matHeaderCellDef> Lift Details </th>
+                          <td mat-cell *matCellDef="let element">
+                            <mat-accordion>
+                              <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                  <mat-panel-title>
+                                    Lift Info -> {{element.liftInfo.vendor}}
+                                  </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <div class="row-content">
+                                  <div class="row">
+                                    <mat-card-subtitle>Vendor: {{element.liftInfo.vendor}}</mat-card-subtitle>
+                                  </div>
+                                  <div class="row">
+                                    <mat-card-subtitle>Serial Number: {{element.liftInfo.serialNumber}}</mat-card-subtitle>
+                                  </div>
+                                  <div class="row">
+                                    <mat-card-subtitle>Contact Number: {{element.liftInfo.contactNumber}}</mat-card-subtitle>
+                                  </div>
+                                </div>
+                              </mat-expansion-panel>
+                              <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                  <mat-panel-title>
+                                    AMC Details -> {{element.amcDetails.vendor}}
+                                  </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <div class="row-content">
+                                  <div class="row">
+                                    <mat-card-subtitle>Vendor: {{element.amcDetails.vendor}} </mat-card-subtitle>
+                                  </div>
+                                  <div class="row">
+                                    <mat-card-subtitle>Cost: {{element.amcDetails.cost}}</mat-card-subtitle>
+                                  </div>
+                                  <div class="row">
+                                    <mat-card-subtitle>Service Due Date: {{element.amcDetails.serviceDueDate}}</mat-card-subtitle>
+                                  </div>
+                                  <div class="row">
+                                    <mat-card-subtitle>Expiry Date: {{element.amcDetails.expiryDate}}</mat-card-subtitle>
+                                  </div>
+                                </div>
+                              </mat-expansion-panel>
+                            </mat-accordion>
+                          </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="moreInfoTableColumns; sticky: true"></tr>
+                        <tr mat-row *matRowDef="let row; columns: moreInfoTableColumns;"></tr>
+                      </table>
+                    </div>
+                    <mat-divider></mat-divider>
+                  </mat-tab>
+                </mat-tab-group>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-12">
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-user-secret"></i> President
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-xl-3 col-sm-6 mb-3">
+              <div class="row-content" >
+                <div class="row">
+                  <mat-card-subtitle><b>Email:</b> {{'Jabu@gmail.com'}}</mat-card-subtitle>
+                </div>
+                <div class="row">
+                  <mat-card-subtitle><b>Contact Number:</b> {{'1234567890'}}</mat-card-subtitle>
+                </div>
+                <div class="row w-100">
+                  <mat-divider class="w-100"></mat-divider>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,169 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <form [formGroup]="managerInfoForm" #managerform="ngForm" novalidate (ngSubmit)="onSubmitBasicInfo()">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card-header-danger">
+              <h4 class="card-title">Create Manager</h4>
+            </div>
+            <div class="card-body">
+              <!-- Basic -->
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-header card-header-danger">
+                      <h4 class="card-title">Manager Info</h4>
+                    </div>
+                    <div class="card-body">
+                      <!--<form>-->
+                      <input type="hidden" formControlName="_id">
+                      <input type="hidden" formControlName="isDeleted">
+                      <input type="hidden" formControlName="roles">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Name" formControlName="name">
+                            <mat-error>
+                              {{errors.name}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <mat-form-field class="example-full-width">
+                            <textarea matInput placeholder="Address" formControlName="address"></textarea>
+                            <mat-error>
+                              {{errors.address}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Email Id" formControlName="email" [(ngModel)]="email">
+                            <mat-error>
+                              {{errors.email}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <mat-form-field class="example-full-width">
+                            <mat-select placeholder="Primary Appartements" formControlName="primaryAppartements" (selectionChange)="onChangePrimary($event.value)" multiple>
+                              <mat-option *ngFor="let appartement of appartementsPrimary" [value]="appartement._id">{{appartement.name}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <mat-form-field class="example-full-width">
+                            <mat-select placeholder="Secondary Appartements" formControlName="secondaryAppartements" multiple (selectionChange)="onChangeSecondary($event.value)">
+                              <mat-option *ngFor="let appartement of appartementsSecondary" [value]="appartement._id">{{appartement.name}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Mobile Number" formControlName="mobileNo">
+                            <mat-error>
+                              {{errors.mobileNo}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Address Proof" type="text" formControlName="addressProof">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Pan card" type="text" formControlName="panCard">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Voter Id" type="text" formControlName="voterId">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                      <!--</form>-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Login info -->
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-header card-header-danger">
+                      <h4 class="card-title">Manager Login Info</h4>
+                    </div>
+                    <div class="card-body">
+                      <!--<form>-->
+                      <div class="row">
+                        <div class="col-md-6">
+                          <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Login Email" formControlName="email" [(ngModel)]="email">
+                            <mat-error>
+                              {{errors.email}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Login Password" type="password" formControlName="password">
+                            <mat-error>
+                              {{errors.password}}
+                            </mat-error>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                      <!--</form>-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button mat-raised-button type="button" class="btn btn-secondary pull-right mr-2" (click)="onClickBack()">Back</button>
+              <button mat-raised-button type="button" *ngIf="selectedManagerIndex >= 0" color="warn" class="btn btn-primary pull-right mr-2" (click)="onClickDelete(managerdelete)">Delete</button>
+              <button mat-raised-button #actionbutton color="primary" type="submit" class="btn btn-primary pull-right mr-2">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<ng-template #managerdelete let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+    <button class="close" type="button" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">Are your sure want to delete ?</div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" type="button" data-dismiss="modal" (click)="d('Cross click')">Cancel</button>
+    <a class="btn btn-primary" (click)="onClickOk()">Ok</a>
+  </div>
+</ng-template>

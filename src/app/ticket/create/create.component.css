@@ -1,0 +1,57 @@
+.example-card {
+  max-width: 100%;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+.example-25-width{
+  width: 25%;
+}
+.example-30-width{
+  width: 30%;
+}
+.example-tab-icon {
+  margin-right: 8px;
+}
+h4 {
+  margin: 0px;
+}
+.card{
+  margin-bottom: 10px;
+}
+.tab-table-container table{
+  width: 100%;
+  box-shadow: none;
+}
+.tab-table-container{
+  width: 100%;
+  padding: 10px;
+  height: 500px;
+  overflow: scroll;
+  margin-bottom: 20px;
+}
+
+.tab-input-container{
+  width: 100%;
+  padding: 10px;
+}
+.cdk-column-action{
+  text-align: center;
+}
+td.cdk-column-action i{
+  cursor: pointer;
+}
+td.mat-cell{
+  /*border-bottom-width: 0px !important;*/
+  padding: 10px 0px;
+}
+.row-content{
+  padding: 15px;
+}

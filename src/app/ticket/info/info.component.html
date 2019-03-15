@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-danger">
+        <h4 class="card-title">Ticket</h4>
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label >Category</label>
+          <div class="form-control" aria-describedby="emailHelp" >{{selectedTicket.category}}</div>
+        </div>
+        <div class="form-group">
+          <label >Priority</label>
+          <div class="form-control" aria-describedby="emailHelp" >{{selectedTicket.priority}}</div>
+        </div>
+        <div class="form-group">
+          <label >Status</label>
+          <div class="form-control" aria-describedby="emailHelp" >{{selectedTicket.status}}</div>
+        </div>
+        <div class="form-group">
+          <label >Assignee</label>
+          <div class="form-control" aria-describedby="emailHelp" >{{selectedTicket.assignee}}</div>
+        </div>
+        <div class="form-group">
+          <label >Reporter</label>
+          <div class="form-control" aria-describedby="emailHelp" >{{selectedTicket.reporter}}</div>
+        </div>
+        <div class="form-group">
+          <label >Summary</label>
+          <div class="form-control" aria-describedby="emailHelp" >{{selectedTicket.summary}}</div>
+        </div>
+        <div class="form-group">
+          <label >Description</label>
+          <div class="form-control" aria-describedby="emailHelp" >{{selectedTicket.description}}</div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button mat-raised-button type="button" class="btn btn-secondary pull-right mr-2" (click)="onClickBack()">Back</button>
+      </div>
+    </div>
+  </div>
+</div>
